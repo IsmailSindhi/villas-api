@@ -22,15 +22,17 @@ const user = require("./routes/userRoute");
 
 app.use("/api/v1", user);
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-
 app.get("*", (req, res) => {
-  res.send({"message": "Villas api"});
+  res.send({"message": "welcome to villas api"});
 });
+
+
+// app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 // app.get("*", (req, res) => {
 //   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 // });
+
 
 // Middleware for Errors
 app.use(errorMiddleware);

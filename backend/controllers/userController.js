@@ -83,11 +83,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/password/reset/${resetToken}`;
-
-  const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+  const message = `Your password reset opt code is :- \n\n ${resetToken} \n\nIf you have not requested this email then, please ignore it.`;
 
   try {
     await sendEmail({
@@ -113,11 +109,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 // Reset Password
 exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   // creating token hash
-  const resetPasswordToken = crypto
-    .createHash("sha256")
-    .update(req.params.token)
-    .digest("hex");
-
+  const resetPasswordToken = req.body.opt
   const user = await User.findOne({
     resetPasswordToken,
     resetPasswordExpire: { $gt: Date.now() },
@@ -262,7 +254,6 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
 // Delete User --Admin
 exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-
   if (!user) {
     return next(
       new ErrorHander(`User does not exist with Id: ${req.params.id}`, 400)

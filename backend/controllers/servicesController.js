@@ -39,13 +39,15 @@ exports.createService = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Get All Service
+// http:locolhost:4000/api/v1/services?keywork = paint
 exports.getAllServices = catchAsyncErrors(async (req, res, next) => {
-  const resultPerPage = 8;
+  const resultPerPage = 10;
   const servicesCount = await Service.countDocuments();
 
   const apiFeature = new ApiFeatures(Service.find(), req.query)
     .search()
-    .filter();
+    .filter()
+    .pagination(resultPerPage);
 
   let services = await apiFeature.query;
 

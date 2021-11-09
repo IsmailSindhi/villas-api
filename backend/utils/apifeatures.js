@@ -32,6 +32,7 @@ class ApiFeatures {
 
     this.query = this.query.find(JSON.parse(queryStr));
 
+    // Filter for approved survices
     return this;
   }
 

@@ -46,8 +46,7 @@ exports.getAllServices = catchAsyncErrors(async (req, res, next) => {
 
   const apiFeature = new ApiFeatures(Service.find(), req.query)
     .search()
-    .filter()
-    .pagination(resultPerPage);
+    .filter();
 
   let services = await apiFeature.query;
 
@@ -265,4 +264,5 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
   });
+
 });

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const serviceSchema = mongoose.Schema({
+const serviceSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please Enter service Name"],
@@ -78,6 +78,16 @@ const serviceSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  approvedByAdmin : {
+    type : Boolean,
+    default : false,
+  },
 });
+
+// serviceSchema.methods.setApprove = function (value) {
+//   this.approvedByAdmin = value
+// }
+
+
 
 module.exports = mongoose.model("Service", serviceSchema);

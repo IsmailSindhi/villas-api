@@ -23,7 +23,7 @@ const service = require("./routes/servicesRoute")
 const order = require("./routes/orderRoute")
 app.use("/api/v1", user);
 app.use("/api/v1", service);
-app.use("/api/v1",oreder)
+app.use("/api/v1", order);
 
 app.get("*", (req, res) => {
   res.send({"message": "welcome to villas api"});

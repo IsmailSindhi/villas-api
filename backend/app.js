@@ -20,8 +20,10 @@ app.use(fileUpload());
 // Route Imports
 const user = require("./routes/userRoute");
 const service = require("./routes/servicesRoute")
+const order = require("./routes/orderRoute")
 app.use("/api/v1", user);
 app.use("/api/v1", service);
+app.use("/api/v1",oreder)
 
 app.get("*", (req, res) => {
   res.send({"message": "welcome to villas api"});

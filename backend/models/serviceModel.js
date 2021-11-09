@@ -31,7 +31,7 @@ const serviceSchema = mongoose.Schema({
       },
     },
   ],
-  category: {
+  mainCategory: {
     type: String,
     required: [true, "Please Enter service Category"],
   },

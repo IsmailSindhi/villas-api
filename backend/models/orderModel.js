@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
   Location : {
-      type: string,
+      type: String,
       default: "google map api"
     },
   orderServices: [

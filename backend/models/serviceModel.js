@@ -15,10 +15,6 @@ const serviceSchema = new mongoose.Schema({
     required: [true, "Please Enter service Price"],
     maxLength: [8, "Price cannot exceed 8 characters"],
   },
-  ratings: {
-    type: Number,
-    default: 0,
-  },
   images: [
     {
       public_id: {
@@ -43,32 +39,6 @@ const serviceSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  numOfReviews: {
-    type: Number,
-    default: 0,
-  },
-  reviews: [
-    {
-      user: {
-        type: mongoose.Schema.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      rating: {
-        type: Number,
-        required: true,
-      },
-      comment: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
@@ -84,9 +54,9 @@ const serviceSchema = new mongoose.Schema({
   },
 });
 
-// serviceSchema.methods.setApprove = function (value) {
-//   this.approvedByAdmin = value
-// }
+serviceSchema.methods.setApprove = function (value) {
+  this.approvedByAdmin = value
+}
 
 
 

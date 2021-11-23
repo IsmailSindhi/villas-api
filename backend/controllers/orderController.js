@@ -6,23 +6,27 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 // Create new Order
 exports.newOrder = catchAsyncErrors(async (req, res, next) => {
   const {
-    orderInfo,
-    orderItems,
-    paymentInfo,
-    itemsPrice,
-    taxPrice,
-    totalPrice,
+    idForMainCatagory,
+    idForSubCatagory,
+    images,
+    location,
+    description,
+    contactMehtod,
+    address
+    
+
   } = req.body;
 
   const order = await Order.create({
-    orderInfo,
-    orderItems,
-    paymentInfo,
-    itemsPrice,
-    taxPrice,
-    totalPrice,
-    paidAt: Date.now(),
-    user: req.user._id,
+    idForMainCatagory,
+    idForSubCatagory,
+    images,
+    location,
+    description,
+    contactMehtod,
+    address,
+
+    user: req.user._id
   });
 
   res.status(201).json({
@@ -83,19 +87,14 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("Order not found with this Id", 404));
   }
 
-  if (order.orderStatus === "Delivered") {
-    return next(new ErrorHander("You have already delivered this order", 400));
+  if (order.orderStatus === "Complete") {
+    return next(new ErrorHander("You have already completed this order", 400));
   }
 
-  if (req.body.status === "Shipped") {
-    order.orderItems.forEach(async (o) => {
-      await updateStock(o.service, o.quantity);
-    });
-  }
   order.orderStatus = req.body.status;
 
-  if (req.body.status === "Delivered") {
-    order.deliveredAt = Date.now();
+  if (req.body.status === "Complete") {
+    order.completetedAt = Date.now();
   }
 
   await order.save({ validateBeforeSave: false });
@@ -104,13 +103,6 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-async function updateStock(id, quantity) {
-  const service = await Service.findById(id);
-
-  service.Stock -= quantity;
-
-  await Service.save({ validateBeforeSave: false });
-}
 
 // delete Order -- Admin
 exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {

@@ -1,46 +1,39 @@
 const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
-  Location : {
+  idForMainCatagory:{
+    type: mongoose.ObjectId
+  },
+  idForSubCatagory:{
+    type: mongoose.ObjectId
+  },
+  location : {
       type: String,
       default: "google map api"
     },
-  orderServices: [
-    {
-      id:{
-        type: mongoose.Schema.ObjectId,
-        required: true,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-    }
-  ],
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
     required: true,
   },
-  paymentInfo: {
-    id: {
-      type: String,
-      required: true,
-    },
-    status: {
-      type: String,
-      required: true,
-    },
-  },
-  paidAt: Date,
+  // paymentInfo: {
+  //   id: {
+  //     type: String,
+  //     required: true,
+  //   },
+  //   status: {
+  //     type: String,
+  //     required: true,
+  //   },
+  // },
+  // paidAt: Date,
 
-  totalPrice: Number,
+  // totalPrice: Number,
   orderStatus: {
     type: String,
-    required: true,
     default: "Pending",
   },
-  completetedAt: Date,
+  // completetedAt: Date,
   createdAt: {
     type: Date,
     default: Date.now,
@@ -48,8 +41,27 @@ const orderSchema = new mongoose.Schema({
   contactMehtod: {
     type: String,
     
+  },
+  images: [
+    {
+      public_id: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  description:{
+    type: String,
+    default: "desciption empty"
+  },
+  address:{
+    type: String,
+   
   }
 });
 
 module.exports = mongoose.model("Order", orderSchema);
-0

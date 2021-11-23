@@ -1,19 +1,20 @@
 const express = require("express");
 const {
+  getAllMainCategorys,
+  getAllSubCategorys,
   getAllServices,
   createService,
   updateService,
   deleteService,
   getServiceDetails,
-  createServiceReview,
-  getServiceReviews,
-  deleteReview,
   getAdminServices,
 } = require("../controllers/servicesController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
 const router = express.Router();
 
+router.route("/maincategorys").get(getAllMainCategorys)
+router.route("/subcategorys").get(getAllSubCategorys)
 router.route("/services").get(getAllServices);
 
 router
@@ -30,12 +31,5 @@ router
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteService);
 
 router.route("/service/:id").get(getServiceDetails);
-
-router.route("/review").put(isAuthenticatedUser, createServiceReview);
-
-router
-  .route("/reviews")
-  .get(getServiceReviews)
-  .delete(isAuthenticatedUser, deleteReview);
 
 module.exports = router;

@@ -38,6 +38,9 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  completetedAt: {
+    type: Date,
+  },
   contactMehtod: {
     type: String,
     

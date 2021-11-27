@@ -22,13 +22,27 @@ exports.getAllSubCategorys = catchAsyncErrors(async (req,res)=>{
   });
 });
 
+
+// get all sub cataegoris with id
+exports.getAllSubCategorysWithId = catchAsyncErrors(async (req,res)=>{
+  const id = req.params.id
+  let mainCategory = await Service.findById(id)
+  mainCategory = mainCategory.mainCategory
+  let subCategory = await Service.find({mainCategory},{"subCategory":1});
+  res.status(200).json({
+    success: true,
+    mainCategory,
+    subCategory
+  });
+});
+
 // setapprove status
 exports.setAppove = catchAsyncErrors(async (req, res) => {
   let service = await Service.findById(req.params.id);
 
   if (!service) {
     return next(new ErrorHander("Service not found", 404));
-  }
+  }  
   Service.methods.setAppove(true);
   res.status(200).json({
     success: true,

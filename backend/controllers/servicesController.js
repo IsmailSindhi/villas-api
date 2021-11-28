@@ -4,37 +4,6 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary");
 
-// get all main cataegoris
-exports.getAllMainCategorys = catchAsyncErrors(async (req,res)=>{
-  // let serices = await Service.find();
-  let mainCategory = await Service.find({},{"mainCategory":1});
-  res.status(200).json({
-    success: true,
-    mainCategory
-  });
-});
-// get all sub cataegoris 
-exports.getAllSubCategorys = catchAsyncErrors(async (req,res)=>{
-  let subCategory = await Service.find({},{"subCategory":1});
-  res.status(200).json({
-    success: true,
-    subCategory
-  });
-});
-
-
-// get all sub cataegoris with id
-exports.getAllSubCategorysWithId = catchAsyncErrors(async (req,res)=>{
-  const id = req.params.id
-  let mainCategory = await Service.findById(id)
-  mainCategory = mainCategory.mainCategory
-  let subCategory = await Service.find({mainCategory},{"subCategory":1});
-  res.status(200).json({
-    success: true,
-    mainCategory,
-    subCategory
-  });
-});
 
 // setapprove status
 exports.setAppove = catchAsyncErrors(async (req, res) => {

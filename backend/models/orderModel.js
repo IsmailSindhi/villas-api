@@ -8,8 +8,10 @@ const orderSchema = new mongoose.Schema({
     type: mongoose.ObjectId
   },
   location : {
-      type: String,
-      default: "google map api"
+    latitude: Number,
+    longitude: Number,
+    latitudeDelta: Number,
+    longitudeDelta: Number
     },
   user: {
     type: mongoose.Schema.ObjectId,
@@ -62,7 +64,11 @@ const orderSchema = new mongoose.Schema({
     default: "desciption empty"
   },
   address:{
-    type: String,
+    street: String,
+    house: String,
+    town: String,
+    province: String,
+    postcode: String,
    
   }
 });

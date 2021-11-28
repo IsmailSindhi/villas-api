@@ -21,7 +21,11 @@ app.use(fileUpload());
 const user = require("./routes/userRoute");
 const service = require("./routes/servicesRoute")
 const order = require("./routes/orderRoute")
+const mainCategory = require("./routes/mainCategoryRoute")
+const subCategory = require("./routes/subCategoryRoute")
 
+app.use("/api/v1", mainCategory);
+app.use("/api/v1", subCategory);
 app.use("/api/v1", user);
 app.use("/api/v1", service);
 app.use("/api/v1", order);

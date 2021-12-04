@@ -1,33 +1,34 @@
 const Order = require("../models/orderModel");
-const Service = require("../models/serviceModel");
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 // Create new Order
 exports.newOrder = catchAsyncErrors(async (req, res, next) => {
-  const {
-    idForMainCatagory,
-    idForSubCatagory,
-    images,
-    location,
-    description,
-    contactMehtod,
-    address
-    
+  let images = [];
 
-  } = req.body;
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
 
-  const order = await Order.create({
-    idForMainCatagory,
-    idForSubCatagory,
-    images,
-    location,
-    description,
-    contactMehtod,
-    address,
+  const imagesLinks = [];
 
-    user: req.user._id
-  });
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      folder: "order",
+    });
+
+    imagesLinks.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.images = imagesLinks;
+  req.body.user = req.user.id;
+  
+  const order = await Order.create(req.body);
 
   res.status(201).json({
     success: true,

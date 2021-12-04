@@ -1,11 +1,25 @@
 const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
-  idForMainCatagory:{
-    type: mongoose.ObjectId
+  MainCatagory:{
+    _id : {
+      type: mongoose.ObjectId,
+      require: true
+    },
+    name : {
+      type:String,
+      required: true
+    }
   },
-  idForSubCatagory:{
-    type: mongoose.ObjectId
+  SubCatagory:{
+    _id : {
+      type: mongoose.ObjectId,
+      require: true
+    },
+    name : {
+      type:String,
+      required: true
+    }
   },
   location : {
     latitude: Number,
@@ -43,6 +57,7 @@ const orderSchema = new mongoose.Schema({
   completetedAt: {
     type: Date,
   },
+
   contactMehtod: {
     type: String,
     

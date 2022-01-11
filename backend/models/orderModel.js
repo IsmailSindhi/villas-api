@@ -2,24 +2,13 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
   MainCatagory:{
-    _id : {
-      type: mongoose.ObjectId,
-      require: true
-    },
-    name : {
-      type:String,
-      required: true
-    }
+    _id : mongoose.ObjectId,
+    name : String,
   },
   SubCatagory:{
-    _id : {
-      type: mongoose.ObjectId,
-      require: true
-    },
-    name : {
-      type:String,
-      required: true
-    }
+    _id : mongoose.ObjectId,
+    name : String,
+  
   },
   
   user: {

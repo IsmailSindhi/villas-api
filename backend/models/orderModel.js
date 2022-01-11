@@ -21,29 +21,13 @@ const orderSchema = new mongoose.Schema({
       required: true
     }
   },
-  location : {
-    latitude: Number,
-    longitude: Number,
-    latitudeDelta: Number,
-    longitudeDelta: Number
-    },
+  
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
     required: true,
   },
-  // paymentInfo: {
-  //   id: {
-  //     type: String,
-  //     required: true,
-  //   },
-  //   status: {
-  //     type: String,
-  //     required: true,
-  //   },
-  // },
-  // paidAt: Date,
-
+ 
   // totalPrice: Number,
   orderStatus: {
     type: String,
@@ -62,18 +46,18 @@ const orderSchema = new mongoose.Schema({
     type: String,
     
   },
-  images: [
-    {
-      public_id: {
-        type: String,
-        // required: true,
-      },
-      url: {
-        type: String,
-        // required: true,
-      },
-    },
-  ],
+  // images: [
+  //   {
+  //     public_id: {
+  //       type: String,
+  //       // required: true,
+  //     },
+  //     url: {
+  //       type: String,
+  //       // required: true,
+  //     },
+  //   },
+  // ],
   description:{
     type: String,
     default: "desciption empty"

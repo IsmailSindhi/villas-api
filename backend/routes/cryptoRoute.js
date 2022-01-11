@@ -10,15 +10,15 @@ const router = express.Router();
 
 // Main Category route
 
-// Get All Main Categories
+// Get All Symbols
 router.route("/getAllSymbols").get(getAllSymbols)
 
-// create main category
+// create cypto
 router
   .route("/admin/crypto/new")
   .post(isAuthenticatedUser, authorizeRoles("admin"), createCrypto);
 
-  // Update and Delete Single Main Categories
+  // Delete Single Main Categories
   router
   .route("/admin/crypto/:id")
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteCrypto);

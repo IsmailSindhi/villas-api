@@ -4,7 +4,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 // Create new Order
 exports.newOrder = catchAsyncErrors(async (req, res, next) => {
-
+  
   req.body.user = req.user.id;
   
   const order = await Order.create(req.body);
@@ -33,8 +33,8 @@ exports.getSingleOrder = catchAsyncErrors(async (req, res, next) => {
 
 // get logged in user  Orders
 exports.myOrders = catchAsyncErrors(async (req, res, next) => {
-  const orders = await Order.find({ user: req.user._id, orderStatus : "Pending" });
-  const 
+  const orders = await Order.find({ user: req.user._id });
+
   res.status(200).json({
     success: true,
     orders,

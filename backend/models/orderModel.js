@@ -5,11 +5,11 @@ const orderSchema = new mongoose.Schema({
     _id : mongoose.ObjectId,
     name : String,
   },
-  SubCatagory:[{
+  SubCatagory:{
+    _id : [mongoose.ObjectId],
     
-    _id : mongoose.ObjectId,
   }
-  ],
+  ,
   
   user: {
     type: mongoose.Schema.ObjectId,

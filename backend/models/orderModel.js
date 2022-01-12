@@ -6,7 +6,7 @@ const orderSchema = new mongoose.Schema({
     name : String,
   },
   SubCatagory:{
-    _id : [mongoose.ObjectId],
+    _id : [],
     
   }
   ,
